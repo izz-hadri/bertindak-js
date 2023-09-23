@@ -12,8 +12,8 @@ public class PersonController : ControllerBase
     {
     }
 
-    [HttpGet(Name = nameof(GetProfile))]
-    public Profile GetProfile()
+    [HttpGet(nameof(GetProfile))]
+    public ActionResult<Profile> GetProfile()
     {
         Profile profile = new Profile()
         {
@@ -29,6 +29,6 @@ public class PersonController : ControllerBase
             }
         };
 
-        return profile;
+        return Ok(profile);
     }
 }

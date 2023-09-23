@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { Component } from 'react';
 import { BkRepositoryService } from './services/BkRepositoryService';
 
@@ -11,44 +12,37 @@ export default class App extends Component {
     }
 
     componentDidMount() {
-        this.repositoryService.populateWeatherData();
+        this.repositoryService.getProfile();
     }
 
-    static renderForecastsTable(forecasts) {
+    static renderProfile(profile) {
         return (
-            <table className='table table-striped' aria-labelledby="tabelLabel">
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Temp. (C)</th>
-                        <th>Temp. (F)</th>
-                        <th>Summary</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {forecasts.map(forecast =>
-                        <tr key={forecast.date}>
-                            <td>{forecast.date}</td>
-                            <td>{forecast.temperatureC}</td>
-                            <td>{forecast.temperatureF}</td>
-                            <td>{forecast.summary}</td>
-                        </tr>
-                    )}
-                </tbody>
-            </table>
+            <div className="row">
+                <div class="px-4 py-5 my-5 text-center">
+                    <h1 class="display-5 fw-bold text-body-emphasis">Welcome</h1>
+                    <h2 class="display-5 fw-bold text-body-emphasis">{profile.name}</h2>
+                    <div class="col-lg-6 mx-auto">
+                        <h5 class="mb-4">
+                            {profile.description}
+                        </h5>
+                        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                            <button type="button" class="btn btn-light btn-lg px-4 gap-3">Achivements</button>
+                            <button type="button" class="btn btn-outline-light btn-lg px-4">Experiences</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         );
     }
 
     render() {
-        let contents = this.state.loading
-            ? <p><em>Loading... Please refresh once the ASP.NET backend has started. See <a href="https://aka.ms/jspsintegrationreact">https://aka.ms/jspsintegrationreact</a> for more details.</em></p>
-            : App.renderForecastsTable(this.state.forecasts);
+        let profile = this.state.loading
+            ? <p>Jap ea..</p>
+            : App.renderProfile(this.state.profile);
 
         return (
-            <div>
-                <h1 id="tabelLabel" >Weather forecast</h1>
-                <p>This component demonstrates fetching data from the server.</p>
-                {contents}
+            <div className="container-fluid text-center bg-danger shadow-lg">
+                { profile }
             </div>
         );
     }

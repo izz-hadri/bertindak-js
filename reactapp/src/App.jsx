@@ -3,8 +3,6 @@ import React, { Component } from 'react';
 import { BkRepositoryService } from './services/BkRepositoryService';
 
 export default class App extends Component {
-    static displayName = App.name;
-
     constructor(props) {
         super(props);
         this.state = {
@@ -22,6 +20,13 @@ export default class App extends Component {
     onAchievementClicked() {
         this.state.loading = true;
         this.repositoryService.getAchievements();
+
+        setTimeout(
+            () => {
+                let section = document.getElementById('achievement');
+                section.scrollIntoView({ behavior: 'smooth' });
+            },
+            100);
     }
 
     renderProfile(profile) {
@@ -75,7 +80,7 @@ export default class App extends Component {
                                 <div className="card shadow">
                                     <div className="card-body">
                                         <h5 className="card-title p-2 text-center">{achievement.title}</h5>
-                                        <h6 className="card-subtitle mb-2 text-muted  text-center">{achievement.description}</h6>
+                                        <h6 className="card-subtitle mb-2 text-muted text-center">{achievement.description}</h6>
                                         <ul>
                                             {achievement.listNotes.map((note, index) => (
                                                 <li key={index}>
@@ -104,16 +109,14 @@ export default class App extends Component {
             ? kejapEa
             : this.renderProfile(this.state.profile);
 
-        let achievements = this.state.loading
-            ? kejapEa
-            : this.renderAchivement(this.state.achievements);
+        let achievements = this.renderAchivement(this.state.achievements);
 
         return (
             <>
-                <div className="container-fluid text-center bg-info shadow-lg">
+                <div id="profile" className="container-fluid text-center bg-info shadow-lg">
                     {profile}
                 </div>
-                <div className="container">
+                <div id="achievement" className="container">
                     {achievements}
                 </div>
             </>

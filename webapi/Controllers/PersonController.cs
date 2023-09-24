@@ -20,9 +20,13 @@ public class PersonController : ControllerBase
             Name = "Izz Hadri Bin Hamidi",
             Position = "Fullstack Developer",
             Description = "Hi, this is my personal website using BertindakJs",
-            Email = "hadriizz.work@gmail.com",
             OtherLinks = new()
             {
+                new()
+                {
+                    Url = "hadriizz.work@gmail.com",
+                    Title = "Email"
+                },
                 new()
                 {
                     Url = "https://www.linkedin.com/in/izzhadri/",
@@ -94,5 +98,125 @@ public class PersonController : ControllerBase
         };
 
         return Ok(achievements);
+    }
+
+    [HttpGet(nameof(GetExperiences))]
+    public ActionResult<List<Experience>> GetExperiences()
+    {
+        List<Experience> experiences = new()
+        {
+            new()
+            {
+                Title = "C#",
+                Keywords = new()
+                {
+                    ".NET 4.8",
+                    ".NET Core",
+                    "Web-API",
+                    "MVC",
+                    "EF Core",
+                    "Razor",
+                    "Azure Functions"
+                },
+                Notes = new()
+                {
+                    "Build a CRUD system using the Asp.Net MVC framework and Asp.Net Web API framework.",
+                    "Implement Entity Framework for Object Relational Mapping (ORM).",
+                    "Design front-end using Razor page.",
+                    "Apply MSSQL as a database.",
+                    "Use Azure Function Queue Trigger and Timer Trigger."
+                }
+            },
+            new()
+            {
+                Title = "Javascript/Typescript",
+                Keywords = new()
+                {
+                    "AngularJs",
+                    "Angular"
+                },
+                Notes = new()
+                {
+                    "Build a front end using AngularJs with Typescript.",
+                    "Build a single-page application (SPA) using Angular.",
+                    "Apply object-oriented programming (OOP) in Typescript."
+                }
+            },
+            new()
+            {
+                Title = "CSS/SCSS",
+                Keywords = new(),
+                Notes = new()
+                {
+                    "Design HTML elements in SCSS based on Figma designs."
+                }
+            },
+            new()
+            {
+                Title = "Python",
+                Keywords = new()
+                {
+                    "Django",
+                    "Machine Learning",
+                    "NLP",
+                    "Object Detection"
+                },
+                Notes = new()
+                {
+                    "Build a system using MVC framework with Artificial Intelligence (AI) using Django.",
+                    "Apply PostgreSQL and SQLite as databases.",
+                    "Manipulate data from the CSV file.",
+                    "Process an image using OpenCV.",
+                    "Training data in Machine Learning (ML).",
+                    "TensorFlow and Keras.",
+                    "Object detection and recognition.",
+                    "Natural Language Processing (NLP).",
+                    "Automate certificate generator using Canvas and Pandas (in Google Colab)."
+                }
+            },
+            new()
+            {
+                Title = "Java",
+                Keywords = new()
+                {
+                    "MVC",
+                    "Android App",
+                    "Firebase"
+                },
+                Notes = new()
+                {
+                    "Build a web system using the MVC framework.",
+                    "Apply Java Oracle as a database.",
+                    "Produce a CRUD mobile application using Android Studio.",
+                    "Apply Firebase and SQLite as databases."
+                }
+            },
+            new()
+            {
+                Title = "Git",
+                Keywords = new()
+                {
+                    "Git Flow"
+                },
+                Notes = new()
+                {
+                    "Collaborated with a team of developers, using Git Flow for version control and branch management.",
+                    "Implemented feature branches and bug fixes, ensuring seamless code integration through pull requests.",
+                    "Resolved merge conflicts and maintained a clean and organized repository using Git best practices."
+                }
+            },
+            new()
+            {
+                Title = "Figma",
+                Keywords = new(),
+                Notes = new()
+                {
+                    "Design web components.",
+                    "Design web pages."
+                }
+            }
+        };
+
+        return Ok(experiences);
     }
 }

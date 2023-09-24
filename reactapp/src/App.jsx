@@ -66,22 +66,22 @@ export default class App extends Component {
                             {profile.otherLinks.map((link, index) => (
                                 <div className="col-lg-1 col-md-2 col-sm-2" key={index}>
                                     <a type="button"
-                                       className="btn btn-warning badge rounded-pill text-dark"
-                                       href={link.url}
-                                       target="_blank">
+                                        className="btn btn-warning badge rounded-pill text-dark"
+                                        href={link.url}
+                                        target="_blank">
                                         {link.title}
                                     </a>
                                 </div>
                             ))}
                         </div>
-                        <div className="text-center p-4 bg-info">
-                            <button type="button" className="btn btn-light btn-md px-4 gap-3 shadow m-1" onClick={this.onAchievementClicked.bind(this)}>
-                                Achivements
-                            </button>
-                            <button type="button" className="btn btn-outline-light btn-md px-4 shadow m-1" onClick={this.onExperienceClicked.bind(this)}>
-                                Experiences
-                            </button>
-                        </div>
+                    </div>
+                    <div className="text-center p-3 bg-info">
+                        <button type="button" className="btn btn-light btn-md px-4 gap-3 shadow m-1" onClick={this.onAchievementClicked.bind(this)}>
+                            Achivements
+                        </button>
+                        <button type="button" className="btn btn-outline-light btn-md px-4 shadow m-1" onClick={this.onExperienceClicked.bind(this)}>
+                            Experiences
+                        </button>
                     </div>
                 </div>
             </div>

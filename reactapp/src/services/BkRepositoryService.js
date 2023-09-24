@@ -36,4 +36,15 @@ export class BkRepositoryService {
             loading: false
         });
     }
+
+    async getAchievements() {
+        let paramRequest = this.getUrl('GetAchievements');
+        let response = await fetch(paramRequest);
+        let data = await response.json();
+
+        this.setState({
+            achievements: data,
+            loading: false
+        });
+    }
 }

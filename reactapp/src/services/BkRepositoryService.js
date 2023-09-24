@@ -44,6 +44,19 @@ export class BkRepositoryService {
 
         this.setState({
             achievements: data,
+            experiences: null,
+            loading: false
+        });
+    }
+
+    async getExperiences() {
+        let paramRequest = this.getUrl('GetExperiences');
+        let response = await fetch(paramRequest);
+        let data = await response.json();
+
+        this.setState({
+            achievements: null,
+            experiences: data,
             loading: false
         });
     }

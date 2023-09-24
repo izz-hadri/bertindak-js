@@ -24,7 +24,7 @@ public class PersonController : ControllerBase
             {
                 new()
                 {
-                    Url = "hadriizz.work@gmail.com",
+                    Url = "mailto:hadriizz.work@gmail.com",
                     Title = "Email"
                 },
                 new()

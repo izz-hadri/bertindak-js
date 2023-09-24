@@ -1,4 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import React, { Component } from 'react';
 import { BkRepositoryService } from './services/BkRepositoryService';
 
@@ -8,6 +9,7 @@ export default class App extends Component {
         this.state = {
             profile: null,
             achievements: [],
+            experiences: [],
             loading: true
         };
         this.repositoryService = new BkRepositoryService(this.setState.bind(this));
@@ -24,6 +26,27 @@ export default class App extends Component {
         setTimeout(
             () => {
                 let section = document.getElementById('achievement');
+                section.scrollIntoView({ behavior: 'smooth' });
+            },
+            100);
+    }
+
+    onExperienceClicked() {
+        this.state.loading = true;
+        this.repositoryService.getExperiences();
+
+        setTimeout(
+            () => {
+                let section = document.getElementById('experience');
+                section.scrollIntoView({ behavior: 'smooth' });
+            },
+            100);
+    }
+
+    onAccordionClicked(index) {
+        setTimeout(
+            () => {
+                let section = document.getElementById(`exp-${index}`);
                 section.scrollIntoView({ behavior: 'smooth' });
             },
             100);
@@ -55,7 +78,7 @@ export default class App extends Component {
                             <button type="button" className="btn btn-light btn-md px-4 gap-3 shadow m-1" onClick={this.onAchievementClicked.bind(this)}>
                                 Achivements
                             </button>
-                            <button type="button" className="btn btn-outline-light btn-md px-4 shadow m-1">
+                            <button type="button" className="btn btn-outline-light btn-md px-4 shadow m-1" onClick={this.onExperienceClicked.bind(this)}>
                                 Experiences
                             </button>
                         </div>
@@ -74,6 +97,7 @@ export default class App extends Component {
         else {
             return (
                 <>
+                    <h1 className="text-center m-3">Achievements</h1>
                     <div className="row mb-5">
                         {achievements.map((achievement, index) => (
                             <div className="col-lg-3 p-3" key={index}>
@@ -98,6 +122,57 @@ export default class App extends Component {
         }
     }
 
+    renderExperiences(experiences) {
+        if (!experiences || experiences.length == 0) {
+            return (
+                <></>
+            );
+        }
+        else {
+            return (
+                <>
+                    <h1 className="text-center m-3">Experiences</h1>
+                    <div className="accordion shadow mb-5">
+                        {experiences.map((exp, index) => {
+                            return (
+                                <div className="accordion-item" key={index}>
+                                    <h2 className="accordion-header shadow-sm">
+                                        <button className="accordion-button collapsed"
+                                            type="button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target={"#exp-" + index}
+                                            aria-expanded="false"
+                                            aria-controls={"exp-" + index}
+                                            onClick={this.onAccordionClicked.bind(this, index)}>
+                                            {exp.title}
+                                            {exp.keywords.map((keyword, i) => (
+                                                <span key={i} className="badge rounded-pill bg-danger m-1">{keyword}</span>
+                                            ))}
+                                        </button>
+                                    </h2>
+                                    <div id={"exp-" + index}
+                                        className="accordion-collapse collapse"
+                                        aria-labelledby={"#expHead-" + index}
+                                        data-bs-parent={"#expAccordion-" + index} >
+                                        <div className="accordion-body">
+                                            <ul>
+                                                {exp.notes.map((note, index) => (
+                                                    <li key={index}>
+                                                        <small>{note}</small>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            )
+                        })}
+                    </div>
+                </>
+            );
+        }
+    }
+
     render() {
         let kejapEa = (
             <div className="p-3">
@@ -111,6 +186,8 @@ export default class App extends Component {
 
         let achievements = this.renderAchivement(this.state.achievements);
 
+        let experiences = this.renderExperiences(this.state.experiences);
+
         return (
             <>
                 <div id="profile" className="container-fluid text-center bg-info shadow-lg">
@@ -118,6 +195,9 @@ export default class App extends Component {
                 </div>
                 <div id="achievement" className="container">
                     {achievements}
+                </div>
+                <div id="experience" className="container">
+                    {experiences}
                 </div>
             </>
         );
